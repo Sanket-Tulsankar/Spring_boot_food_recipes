@@ -13,4 +13,10 @@ public class GlobalExceptionHandler {
 		String exceptionMsgString = ex.exceptionMsgString;
 		return new ResponseEntity<String>(exceptionMsgString,HttpStatus.BAD_REQUEST);
 	}
+
+	@ExceptionHandler(NoRecipeFoundException.class)
+	public ResponseEntity<String> noRecipeFoundException(NoRecipeFoundException ex){
+		String msg = ex.msg;
+		return new ResponseEntity<String>(msg,HttpStatus.BAD_REQUEST);
+	}
 }
