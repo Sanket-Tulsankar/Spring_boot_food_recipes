@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.recipes.entities.SignUpInfo;
@@ -19,6 +20,7 @@ import com.recipes.exceptionHandler.UserNotFoundException;
 import com.recipes.services.SignUpService;
 
 @RestController
+@RequestMapping("/signup")
 @CrossOrigin
 public class SignUpController {
 
@@ -30,9 +32,18 @@ public class SignUpController {
 
 	@PostMapping("/create")
 	public ResponseEntity<SignUpInfo> createUser(@RequestBody SignUpInfo signUpInfo) throws Exception {
-		String password = signUpInfo.getPassword();
-		passwordEncoder.encode(password);
-		SignUpInfo createUser = this.signUpService.createUser(signUpInfo);
+		String password = passwordEncoder.encode(signUpInfo.getPassword());
+		
+		SignUpInfo signUpInfo2=new SignUpInfo();
+		
+		signUpInfo2.setEmail(signUpInfo.getEmail());
+		signUpInfo2.setFname(signUpInfo.getFname());
+		signUpInfo2.setLname(signUpInfo.getLname());
+		signUpInfo2.setUsername(signUpInfo.getUsername());
+		signUpInfo2.setPassword(password);
+		
+		
+		SignUpInfo createUser = this.signUpService.createUser(signUpInfo2);
 		return new ResponseEntity<SignUpInfo>(createUser, HttpStatus.CREATED);
 	}
 	

@@ -52,4 +52,11 @@ public class RecipeServiceImpl implements RecipeService {
 		return null;
 	}
 
+	// ------------------------------------------------------------------
+	
+//	public Recipes searchRecipes(String recipe_name) {
+//		Recipes searchByRecipeName = this.recipeRepository.searchByRecipeName(recipe_name);
+//		return searchByRecipeName;
+//		}
+	
 }
